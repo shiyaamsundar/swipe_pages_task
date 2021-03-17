@@ -14,8 +14,50 @@ exports.signout=(req,res)=>{
 }
 
 
+exports.addtowatchlist=(req,res)=>{
+    console.log(req.body['url'],req.body['useremail']);
+    const reqemail=req.body['useremail']
+    const url=req.body['url']
+
+   const user= User.find({email:reqemail}).exec((err,data)=>{
+        if(!err){
+            
+            data[0]['watchlist']+=url
+            const id=data[0]['_id']
+            User.findByIdAndUpdate({"_id":id},
+            {"$push":{"watchlist":url}},function(err,raw){
+                if(!err){
+
+                }
+            })
+            
+            
+        }
+    })
+    
+    
+
+}
+
+
+exports.getuserwatchlist=(req,res)=>{
+    const id=req.params
+    console.log(id);
+
+    User.find({email:id['email']}).exec((err,data)=>{
+        console.log(data);
+
+        if(!err){
+            console.log(data[0]['watchlist']);
+            return res.json(data[0]['watchlist'])
+        }
+    })
+    
+}
+
 
 exports.signup=(req,res)=>{
+    console.log('signuo');
     const user=new User(req.body)
     user.save((err,user)=>{
 
@@ -60,6 +102,8 @@ exports.signin=(req,res)=>{
 
     })
 }
+
+
 
 
 

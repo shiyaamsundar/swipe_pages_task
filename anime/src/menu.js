@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from "react-router-dom";
+import { logout } from './api';
 
 const Menu = () => {
     return (
@@ -21,7 +22,7 @@ const Menu = () => {
         </Link>
       </li>
       <li className="nav-item">
-        <Link  className="nav-link fa ">
+        <Link   className="nav-link fa " onClick={logout}>
         <span className="icon">logout</span>
         </Link>
       </li>

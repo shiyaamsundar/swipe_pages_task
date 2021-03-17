@@ -20,6 +20,8 @@ const Login = () => {
 
       const onsubmit=event=>{
         event.preventDefault()
+        window.$username=values.email
+      
         setvalues({...values,error:false,loading:true})
 
         login({email,password})
@@ -53,6 +55,8 @@ const Login = () => {
       const performredirect=()=>{
       
         if(didredirect){
+
+
 
           return <Redirect to="/"/>
         

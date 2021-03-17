@@ -16,6 +16,32 @@ export const getalltopanime=()=>{
     
   }
 
+var d = new Date();
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+var n = weekday[d.getDay()];
+
+console.log(n)
+
+  export const getallamineoftheday=()=>{
+    return fetch(`https://api.jikan.moe/v3/schedule/${n}`,{method:"GET"})
+    .then(res=>{
+        return res.json()
+    })
+    .catch(err=>console.log(err))
+    
+  }
+
+
+
+
 
   export const signup=user=>{
     return fetch(`${API}/signup`,{
@@ -53,11 +79,11 @@ export const login=user=>{
 
 
 
-export const signout=next=>{
+
+export const logout=next=>{
     if(typeof window!=="undefined")
     {
         localStorage.removeItem("jwt")
-        next()
 
         return fetch(`${API}/signout`,{
             method:"GET"
@@ -75,3 +101,31 @@ export const authenticate=(data,next)=>{
         next()
     }
 }
+
+
+
+export const addtowatchlist=(data,email)=>{
+    console.log(data);
+    
+    return fetch(`${API}/addtowatchlist`,{
+        method:"post",
+     
+
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url:data ,useremail:email })
+    })
+    .then(res=>{
+        return res.json()
+    }).catch(error=>console.log(error))
+}
+
+
+export const allwatchlist=(email)=>{
+    return fetch(`${API}/watchlist/${email}`,{method:"GET"})
+    .then(res=>{
+        return res.json()
+    })
+    .catch(err=>console.log(err))
+    
+  }
+

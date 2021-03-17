@@ -44,7 +44,7 @@ const Signup = () => {
         return(
           <div className="col-md-6 offset-sm-3 text-left">
         <div className="alert alert-success" style={{display: values.success?"":"none"}}>
-          New Account has been created Successfully.  <Link to="/signin">Click here</Link> to Singin
+          New Account has been created Successfully.  <Link to="/login">Click here</Link> to login
         </div>
         </div>
         )
@@ -80,7 +80,7 @@ const Signup = () => {
                   <label className="text-dark">User Name</label>
                   <input className="form-control" type="text" value={name} onChange={handleChange('name')} />
                 </div>
-                <button className="btn btn-success btn-block" onClick={onsubmit}>Submit</button>
+                <button className="btn btn-success btn-block" onClick={onSubmit}>Submit</button>
               </form>
           </div>
           </div>

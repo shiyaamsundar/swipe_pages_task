@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { Link, withRouter } from "react-router-dom";
-import { getalltopanime,getallmangaanime } from './api';
+import { getalltopanime,getallmangaanime ,addtowatchlist} from './api';
 
 
 const Manga = () => {
@@ -43,18 +43,17 @@ const Manga = () => {
 <div className="wrapper">
 
 {upcoming.manga.map((data,index)=>{
-    return (
+    return (<button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)}>
                <div>
         <div className="items1 card1" key={index}>
-        <a target="_blank" href={data["url"]}>   
+
             <img src={data["image_url"]}/>
-            </a>
         </div>
         {/* <div>
         <p className="cardname">{data["title"]}</p>
         </div> */}
         
-        </div>
+        </div></button>
 
     )
 

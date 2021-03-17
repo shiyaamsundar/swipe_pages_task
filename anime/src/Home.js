@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { Link, withRouter } from "react-router-dom";
-import { getalltopanime,getallmangaanime } from './api';
+import { getalltopanime,addtowatchlist } from './api';
 import Manga from './Manga';
+import Schedule from './Schedule';
 
 
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
 
 
 
-                console.log(upcoming.top[0],'top');
+                console.log(upcoming.top,'top');
             });
 
             
@@ -48,21 +49,23 @@ const Home = () => {
     },[])
 
 
-
+    const fun=()=>{
+        console.log();
+    }
 
     return (
         <div>
                         <Sidediv>
  <div className="container col card">
 
-<span className="pt-5 pl-2 "></span>
+<span className="pt-5 pl-2 ">{window.$username}</span>
 <button className="btn btn-primary">
 <i class="fa fa-user" aria-hidden="true"></i><span></span></button>
 <div className="pt-4 pl-3">
 <StyledI>
 
     <Link to="/watchlist"><div className="row container pt-4"> <i class="fa fa-id-badge" aria-hidden="true"/><h5>User Watchlist</h5></div></Link>
-   
+   !double tap on any image to add into user watch list
 
     </StyledI>
 </div>
@@ -82,17 +85,17 @@ const Home = () => {
 
 {upcoming.top.map((data,index)=>{
     return (
-               <div>
+               <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)}><div>
         <div className="items card" key={index}>
-        <a target="_blank" href={data["url"]}>   
+        {/* <a target="_blank" href={data["url"]}>    */}
             <img src={data["image_url"]}/>
-            </a>
+            {/* </a> */}
         </div>
         {/* <div>
         <p className="cardname">{data["title"]}</p>
         </div> */}
         
-        </div>
+        </div></button>
 
     )
 
@@ -103,6 +106,9 @@ const Home = () => {
 
 <div className="c1"></div>
 <Manga/>
+
+<div className="c1"></div>
+<Schedule/>
 
 
 <div className="container">
@@ -160,7 +166,7 @@ padding-top:50px;
 `;
 
 const Sidediv=styled.div`
-width:15rem;
+width:20rem;
 height:100%;
 position:absolute;
 .card{
