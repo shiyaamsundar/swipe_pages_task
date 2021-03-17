@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
-import { Link, withRouter } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import { getalltopanime,addtowatchlist } from './api';
 import Manga from './Manga';
 import Schedule from './Schedule';
@@ -48,6 +48,10 @@ const Home = () => {
 
     },[])
 
+    const press=(data)=>{
+        console.log('oo',data);
+    }
+
 
     const fun=()=>{
         console.log();
@@ -85,7 +89,8 @@ const Home = () => {
 
 {upcoming.top.map((data,index)=>{
     return (
-               <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)}><div>
+                   
+               <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)} onClick={()=>press(data)}><div>
         <div className="items card" key={index}>
         {/* <a target="_blank" href={data["url"]}>    */}
             <img src={data["image_url"]}/>

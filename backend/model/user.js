@@ -18,7 +18,8 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    watchlist:[String]
+    watchlist:[String],
+    recommendation:[String]
 
 },{timestamps:true})
 
