@@ -59,14 +59,14 @@ const Schedule = () => {
 
 {upcoming.day.map((data,index)=>{
     return (
-        <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)}> <div>
+        <Link to={`/anime/${data["mal_id"]}`}>  <div>
         <div className="items1 card1" key={index}>
             <img src={data["image_url"]}/>
 
         </div>
         
         
-        </div></button>
+        </div></Link>
 
     )
 

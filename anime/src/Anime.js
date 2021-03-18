@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { getspecificanime,addtowatchlist } from './api'
+import { getspecificanime,addtowatchlist, pushtorecmm } from './api'
 import { Link, Redirect, withRouter } from "react-router-dom";
 import styled from 'styled-components'
 
@@ -20,9 +20,7 @@ const Anime = ({match}) => {
             })
 
             console.log(values.d,'anime');
-            // console.log(values.d["related"]["Prequel"]);
-            // console.log(values.d["related"]["Adaptation"]);
-            // console.log(values.d["related"]["Other"]);
+            pushtorecmm(data["genres"],window.$username)
 
         });
 

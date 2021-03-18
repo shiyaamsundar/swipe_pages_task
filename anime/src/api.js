@@ -111,6 +111,20 @@ export const authenticate=(data,next)=>{
     }
 }
 
+export const pushtorecmm=(data,email)=>{
+    console.log(data,email);
+    return fetch(`${API}/addtorecmm`,{
+        method:"post",
+     
+
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gener:data ,useremail:email })
+    })
+    .then(res=>{
+        return res.json()
+    }).catch(error=>console.log(error))
+}
+
 
 
 export const addtowatchlist=(data,email)=>{
@@ -138,3 +152,12 @@ export const allwatchlist=(email)=>{
     
   }
 
+  export const allrecmmlist=(email)=>{
+    
+    return fetch(`${API}/recmm/${email}`,{method:"GET"})
+    .then(res=>{
+        return res.json()
+    })
+    .catch(err=>console.log(err))
+    
+  }

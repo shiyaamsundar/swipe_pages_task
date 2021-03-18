@@ -4,6 +4,7 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 import { getalltopanime,addtowatchlist } from './api';
 import Manga from './Manga';
 import Schedule from './Schedule';
+import Recommendation from './Recommendation';
 
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
                 console.log(upcoming.top,'top');
             });
 
+            
             
 
 
@@ -71,6 +73,8 @@ const Home = () => {
 </div>
 </Sidediv>
 <Maindiv>
+    <Recommendation/>
+    <div className="c1"></div>
 
     <h1>Upcomig anime</h1>
     {!upcoming.loading==false?(

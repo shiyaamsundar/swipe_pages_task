@@ -34,9 +34,66 @@ exports.addtowatchlist=(req,res)=>{
             
         }
     })
-    
-    
+}
 
+exports.addtouserrecmm=(req,res)=>{
+    console.log("recommed",req.body.useremail);
+    const reqemail=req.body.useremail
+    const recmmarr=req.body.gener
+
+   const user= User.find({email:reqemail}).exec((err,data)=>{
+        let datarecm=data[0]["recommendation"]
+        const id=data[0]['_id']
+        let arr=[]
+        let cnt=0
+        let j=0
+        let k=datarecm.length+recmmarr.length
+            if(recmmarr.length<10)
+            {
+                for(let i=0;i<recmmarr.length;i++)
+                {
+                    console.log('aa');
+                    arr.push(recmmarr[i])
+                    cnt+=1
+                }
+                console.log(cnt,"cnntttt");
+                for(let i=cnt;i<=10;i++)
+                {
+
+                    if(datarecm.length>cnt && j<k){
+                    arr.push(datarecm[j])
+                    j+=1
+                    }
+                    else{
+
+                        break
+                    }
+
+                }
+
+                
+            }else{
+                for(let i=0;i<10;i++)
+                {
+                    arr.push(recmmarr[i])
+                    cnt+=1
+                }
+
+            }
+
+            User.updateMany({_id:id},{$set:{recommendation:arr}}).exec().then(res=>console.log('updated')).catch(err=>console.log(err))
+
+
+    })
+
+}
+
+exports.getallrecmm=(req,res)=>{
+    const reqemail=req.params.email
+    User.find({email:reqemail}).exec((err,data)=>{
+        
+        return res.json(data[0]["recommendation"])
+    })
 }
 
 
@@ -45,7 +102,7 @@ exports.getuserwatchlist=(req,res)=>{
     console.log(id);
 
     User.find({email:id['email']}).exec((err,data)=>{
-        console.log(data);
+    
 
         if(!err){
             console.log(data[0]['watchlist']);
@@ -74,6 +131,7 @@ exports.signup=(req,res)=>{
 }
 
 exports.signin=(req,res)=>{
+    
     const {email,password}=req.body
 
     User.findOne({email},(err,user)=>{
@@ -94,6 +152,8 @@ exports.signin=(req,res)=>{
         res.cookie("token",token,{expire:new Date()+99})
 
         const {_id,name,email}=user
+
+
         return res.json({token,user:{
             id:_id,
             name:name,
