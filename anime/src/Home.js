@@ -39,23 +39,16 @@ const Home = () => {
 
 
     useEffect(()=>{
-
-        
         loaddata()
-        
-
-
-
     },[])
 
     const press=(data)=>{
-        console.log('oo',data);
+        return <Redirect to="/"/>
+        
     }
 
 
-    const fun=()=>{
-        console.log();
-    }
+
 
     return (
         <div>
@@ -69,7 +62,6 @@ const Home = () => {
 <StyledI>
 
     <Link to="/watchlist"><div className="row container pt-4"> <i class="fa fa-id-badge" aria-hidden="true"/><h5>User Watchlist</h5></div></Link>
-   !double tap on any image to add into user watch list
 
     </StyledI>
 </div>
@@ -90,7 +82,9 @@ const Home = () => {
 {upcoming.top.map((data,index)=>{
     return (
                    
-               <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)} onClick={()=>press(data)}><div>
+            //    <button onDoubleClick={()=>addtowatchlist(data['url'],window.$username)} onClick={()=>press(data['mal_id'])}>
+                  <Link to={`/anime/${data["mal_id"]}`}> 
+                   <div>
         <div className="items card" key={index}>
         {/* <a target="_blank" href={data["url"]}>    */}
             <img src={data["image_url"]}/>
@@ -100,9 +94,10 @@ const Home = () => {
         <p className="cardname">{data["title"]}</p>
         </div> */}
         
-        </div></button>
-
+        </div></Link>
+        
     )
+
 
 })}
 

@@ -6,6 +6,7 @@ import Signup from "./signup";
 import Login from "./login";
 import Watchlist from "./Wishlist";
 import Details from "./Details";
+import Anime from "./Anime";
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/login" component={Login} exact/>
       <Route path="/watchlist" component={Watchlist} exact/>
       <Route path="/details" component={Details} exact/>
+      <Route path="/anime/:id" component={Anime} exact/>
 
 
       </div>

@@ -16,6 +16,15 @@ export const getalltopanime=()=>{
     
   }
 
+  export const getspecificanime=(id)=>{
+      return fetch(`https://api.jikan.moe/v3/anime/${id}`,{method:"GET"})
+      .then(res=>{
+          return res.json()
+      })
+      .catch(err=>console.log(err))
+
+  }
+
 var d = new Date();
 var weekday = new Array(7);
 weekday[0] = "Sunday";

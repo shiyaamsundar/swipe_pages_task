@@ -3,6 +3,13 @@ import { Link, withRouter } from "react-router-dom";
 import { logout } from './api';
 
 const Menu = () => {
+
+  const logoutfunction=()=>{
+    logout()
+    window.location.reload()
+
+  }
+
     return (
         <div>
             <ul className="nav nav-tabs bg-dark pt-1">
@@ -22,7 +29,7 @@ const Menu = () => {
         </Link>
       </li>
       <li className="nav-item">
-        <Link   className="nav-link fa " onClick={logout}>
+        <Link   className="nav-link fa " onClick={logoutfunction}>
         <span className="icon">logout</span>
         </Link>
       </li>
